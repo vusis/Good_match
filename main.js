@@ -32,10 +32,9 @@ fs.createReadStream("sample_data.csv")
   console.log("---------Good Match program by Vusi Sithole------------\n");
   console.log("----------------------Results--------------------------\n");
   for (var ii = 0; ii < maleSet.length; ii++){
+      
     program((maleSet[ii]),(femaleSet[ii]))
-
     }
-
 }); 
 
 function program(name_1, name_2){
