@@ -95,17 +95,17 @@ function listOfAdditions(numberArr){
         if (numberArr.length == 1){
             numberArr.push(0)
         }
-        var ve = addFirstAndLast(numberArr)
+        var sumFirstAndLast = addFirstAndLast(numberArr)
         numberArr = numberArr.slice(1, -1);
-        if (ve > 9){ 
-            sNumber = ve.toString();
+        if (sumFirstAndLast > 9){ 
+            sNum = sumFirstAndLast.toString();
 
-            for (var y = 0, len = sNumber.length; y < len; y += 1) {
-                numbers.push(+sNumber.charAt(y));
+            for (var y = 0, len = sNum.length; y < len; y += 1) {
+                numbers.push(+sNum.charAt(y));
             }
         } 
         else {
-            numbers.push(ve)}
+            numbers.push(sumFirstAndLast)}
     }
     
     
