@@ -3,10 +3,8 @@ const fs = require('fs')
 const results = [];
 var csvData=[];
 
-var maleSet = []
-var femaleSet = []
-let values = [];
-let keys = [];
+var maleSet = [];
+var femaleSet = [];
 
 
 fs.createReadStream("sample_data.csv")
@@ -15,32 +13,32 @@ fs.createReadStream("sample_data.csv")
     try {
 
         if(data.Gender == " m"){
-            maleSet.push(data.Name)
+            maleSet.push(data.Name);
         }else if (data.Gender ==" f"){
-          femaleSet.push(data.Name)
+          femaleSet.push(data.Name);
         }else{
-        results.push(data)
+        results.push(data);
         }
     }
     catch(err) {
-        console.log("Incorrect data was found on the csv file")
+        console.log("Incorrect data was found on the csv file");
     }
 })
 .on('end',function(){
 
-  maleSet = remove_duplicates(maleSet) 
-  femaleSet = remove_duplicates(femaleSet)
-  console.log(maleSet)
-  console.log(femaleSet)
+  maleSet = remove_duplicates(maleSet);
+  femaleSet = remove_duplicates(femaleSet);
 
-  console.log("---------Good Match program by Vusi Sithole------------\n")
+  console.log("---------Good Match program by Vusi Sithole------------\n");
+  console.log("----------------------Results--------------------------\n");
   for (var ii = 0; ii < maleSet.length; ii++){
-    executor((maleSet[ii]),(femaleSet[ii]))
+    program((maleSet[ii]),(femaleSet[ii]))
 
     }
 
 }); 
-function executor(name_1,name_2){
+
+function program(name_1, name_2){
     
     var wordToMatch = name_1.concat("matches", name_2);
     var logger = fs.createWriteStream('output.txt', {
@@ -49,17 +47,14 @@ function executor(name_1,name_2){
     
     const wordToMatchArr = wordToMatch.split("");
     
-    values = countOccurances(wordToMatchArr) 
-    
-    console.log("--------Results-------------")
+    values = countOccurances(wordToMatchArr);
     
     do {
-        newList = listOfAdditions(values)
-        values = newList;
+        var numberslist = listOfAdditions(values)
+        values = numberslist;
     }while (values.length > 2);
     
-    
-    var total_percent = parseInt(newList.join(""))
+    var total_percent = parseInt(numberslist.join(""));
     
     if (total_percent < 80){
         console.log(name_1 + " matches " + name_2 + " " + total_percent + "%");
@@ -67,7 +62,7 @@ function executor(name_1,name_2){
         
     }else{
         console.log(name_1 + " matches " + name_2 + " " + total_percent + "%, good match");
-        logger.write(name_1 + " matches " + name_2 + " " + total_percent + "%, good match");
+        logger.write(name_1 + " matches " + name_2 + " " + total_percent + "%, good match\n");
     } 
 }
 
@@ -83,7 +78,7 @@ function countOccurances (stringArr) {
 
 function addFirstAndLast(numberArr){
     
-    return (numberArr[0] + numberArr[numberArr.length - 1])
+    return (numberArr[0] + numberArr[numberArr.length - 1]);
     
 }
 
@@ -95,7 +90,7 @@ function listOfAdditions(numberArr){
         if (numberArr.length == 1){
             numberArr.push(0)
         }
-        var sumFirstAndLast = addFirstAndLast(numberArr)
+        var sumFirstAndLast = addFirstAndLast(numberArr);
         numberArr = numberArr.slice(1, -1);
         if (sumFirstAndLast > 9){ 
             sNum = sumFirstAndLast.toString();
@@ -107,7 +102,6 @@ function listOfAdditions(numberArr){
         else {
             numbers.push(sumFirstAndLast)}
     }
-    
     
     return numbers
 }
@@ -123,4 +117,3 @@ function remove_duplicates(arr) {
     }
     return ret_arr;
   }
-
